@@ -1,0 +1,29 @@
+8
+
+dir
+50
+svn://lucy@codd.uwcs.co.uk/gsdp/trunk/php/style
+svn://lucy@codd.uwcs.co.uk/gsdp
+
+
+
+2010-03-19T04:33:20.090961Z
+50
+lucy
+
+
+svn:special svn:externals svn:needs-lock
+
+settlements.css
+file
+
+
+
+
+2010-03-19T04:26:57.000000Z
+99b0a761216733952d6f23d96dd3538c
+2010-03-19T04:33:20.090961Z
+50
+lucy
+has-props
+

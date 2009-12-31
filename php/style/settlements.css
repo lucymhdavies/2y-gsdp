@@ -1,0 +1,317 @@
+/* begin chris's style */
+
+body {
+	background-color: #426592;
+	margin-left: 10px;
+	margin-top: 0px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	background-image: url(../img/bg.jpg);
+	background-repeat: repeat-x;
+	background-position:top;
+	font-family: Trebuchet MS, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #253B55;
+}
+h1,h2,h3,h4,h5,h6 {
+	font-weight: bold;
+}
+h1 {
+	font-size: 36px;
+	color: #333;
+}
+h2 {
+	font-size: 18px;
+	color: #424242;
+}
+
+h3 {
+	font-size: 16px;
+	color: #FFF;
+	margin:5px;
+	width:auto;
+	background:url(../img/redtrans.png);
+	border-bottom:1px solid #FF7F7D;
+	padding:5px;
+}
+
+h3 a:link {
+	color:#FFF;
+}
+
+h3 a:visited {
+	color:#FFF;
+}
+
+h4 {
+	font-size: 14px;
+	color: #FFF;
+	margin:5px;
+	width:auto;
+	background:url(../img/RoundedBoxBlueBG.png);
+	border-bottom:1px solid #999;
+	padding:5px;
+}
+
+p{
+	margin:5px;
+	padding:5px;
+}
+
+.errorbox{
+	background:url(../img/redtrans.png);
+	margin:10px;
+	padding:10px;
+	text-align:center;
+	border:1px solid #FF7F7D;
+}
+
+.messagebox{
+	background:url(../img/greentrans.png);
+	margin:10px;
+	padding:10px;
+	text-align:center;
+	border:1px solid #9C9;
+}
+
+.messagebox a{
+	color:#466A9B;
+}
+
+.removeText{
+	background:url(../img/redtrans.png);
+	text-align:center;
+	border:1px solid #FF7F7D;
+}
+
+.removeText a{
+}
+
+.editText{
+	background:url(../img/greentrans.png);
+	text-align:center;
+	border:1px solid #9C9;
+}
+
+
+.formElement{
+	background:url(../img/RoundedBoxBlueBG.png); border:solid 1px #999; font-size:14px; padding:5px; text-align:center; color:#CCC;
+}
+
+.formElementSmall{
+	background:url(../img/RoundedBoxBlueBG.png); border:solid 1px #999; color:#CCC;
+}
+
+.clickbox{
+	background:url(../img/RoundedBoxBlueBG.png); text-align:center;  border:#CCC 2px solid; color:#FFF;
+	margin:5px;
+	padding:5px;
+	margin-bottom:0px;
+	width: 200px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.clickbox a {
+	color:#FFF;
+	display: block;
+}
+
+.mainblock{
+	background:url(../img/whitetrans.png); padding:5px; margin:5px;
+}
+
+
+
+/* end chris's style */
+
+
+
+
+
+.centerbox
+{
+	background: rgba(255,255,255,0.8);
+}
+
+
+
+.box
+{
+	border: 1px solid black;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 10px;
+	margin-right: 10px;
+	padding: 5px;
+	opacity: .8;
+}
+div.box:hover
+{
+	opacity: 1;
+}
+.box-focus
+{
+	padding: 5px;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+.green
+{
+	background-color: #6F6;
+}
+.red
+{
+	background-color: #F66;
+}
+.blue
+{
+	background-color: #66F;
+}
+.yellow
+{
+	background-color: yellow;
+}
+.orange
+{
+	background-color: #FC5;
+}
+.gray
+{
+	background-color: #CCC;
+}
+
+body {
+	margin:10px 10px 0px 10px;
+	padding:0px;
+	}
+
+.buttons
+{
+	margin-left: auto;
+	text-align:center;
+	padding-bottom:10px;
+}
+.button
+{
+	width: 150px; height: 40px;
+}
+	
+.detail-box
+{
+	width: 45%;
+	border: 1px solid black;
+	margin-left: auto; 
+	margin-right: auto;
+	padding: 5px;
+	display: inline-block;
+}
+.detail-wrapper
+{
+	margin-bottom: 15px;
+}
+
+#leftcontent {
+	position: absolute;
+	left:10px;
+	top:50px;
+	bottom: 10px;
+	overflow-y:auto;
+	width:200px;
+	background:rgba(255,255,255,0.2);
+	border:1px solid #000;
+	}
+
+#centercontent {
+		margin-left: 199px;
+		margin-right:199px;
+	border:1px solid #000;
+		margin-left: 201px;
+		margin-right:201px;
+	border-bottom: 0;
+	position: absolute;
+	top:50px;
+	bottom: 10px;
+	overflow-y:auto;
+	left: 10px;
+	right: 10px;
+	}
+html>body #centercontent {
+		margin-left: 201px;
+		margin-right:201px;
+	}
+
+#rightcontent {
+	position: absolute;
+	right:10px;
+	top:50px;
+	bottom: 10px;
+	overflow-y:auto;
+	width:200px;
+	background:rgba(255,255,255,0.2);
+	border:1px solid #000;
+	}
+
+div#leftcontent:hover, div#rightcontent:hover
+{	
+	background:rgba(255,255,255,0.6);
+}
+
+#banner {
+	background:rgba(255,255,255,0.2);
+	height:40px;
+	border-top:1px solid #000;
+	border-right:1px solid #000;
+	border-left:1px solid #000;
+	}
+	
+p,h1,pre {
+	margin:0px 10px 10px 10px;
+	}
+	
+h1 {
+	font-size:14px;
+	padding-top:10px;
+	}
+	
+#banner h1 {
+	font-size:14px;
+	padding:10px 10px 0px 10px;
+	margin:0px;
+	}
+
+.clear
+{
+	clear: both;
+}
+
+
+#welcome, #timeDiv
+{
+	width: 200px;
+	background-color: rgba(153,255,204,0.4);
+	height: 40px;
+}
+#welcome
+{	
+	border-right: 1px solid black;
+	float:left;
+}
+#timeDiv
+{
+	float:right;
+	text-align: center;
+	border-left: 1px solid black;
+}
+#theTime
+{
+	font-size: 1.2em;
+}
+
+
+hr
+{
+	height: 1px;
+	border: 0;
+	background-color: #AAA;
+}
