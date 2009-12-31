@@ -1,0 +1,5 @@
+host = uwcs.co.uk
+port = 3306
+database = lucy
+user = lucy@uwcs.co.uk
+password = 

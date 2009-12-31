@@ -1,0 +1,26 @@
+// The login class
+
+public class Login
+{
+	public UserRole Login( String username, String password )
+		throws InvalidUsernamePasswordException
+	{
+		if ( true ) // if correct
+		{
+			String role = "Reference Data Clerk";
+			return role;
+		}
+		else
+		{
+			throw new InvalidUsernamePasswordException();
+		}
+	}
+}
+
+class InvalidUsernamePasswordException extends Exception
+{
+	public String toString()
+	{
+		return "Username/Password combination was invalid";
+	}
+}

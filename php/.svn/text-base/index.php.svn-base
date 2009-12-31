@@ -1,0 +1,287 @@
+<html>
+<head>
+<title>Test XML Files</title>
+<script>
+function addEvent( obj, type, fn ) {
+	if (obj.addEventListener) {
+		obj.addEventListener( type, fn, false );
+		EventCache.add(obj, type, fn);
+	}
+	else if (obj.attachEvent) {
+		obj["e"+type+fn] = fn;
+		obj[type+fn] = function() { obj["e"+type+fn]( window.event ); }
+		obj.attachEvent( "on"+type, obj[type+fn] );
+		EventCache.add(obj, type, fn);
+	}
+	else {
+		obj["on"+type] = obj["e"+type+fn];
+	}
+}
+
+var EventCache = function(){
+	var listEvents = [];
+	return {
+		listEvents : listEvents,
+		add : function(node, sEventName, fHandler){
+			listEvents.push(arguments);
+		},
+		flush : function(){
+			var i, item;
+			for(i = listEvents.length - 1; i >= 0; i = i - 1){
+				item = listEvents[i];
+				if(item[0].removeEventListener){
+					item[0].removeEventListener(item[1], item[2], item[3]);
+				};
+				if(item[1].substring(0, 2) != "on"){
+					item[1] = "on" + item[1];
+				};
+				if(item[0].detachEvent){
+					item[0].detachEvent(item[1], item[2]);
+				};
+				item[0][item[1]] = null;
+			};
+		}
+	};
+}();
+addEvent(window,'unload',EventCache.flush);
+
+function switchMenu(obj)
+{
+	var el = document.getElementById(obj);
+	if ( el.style.display != 'none' )
+	{
+		el.style.display = 'none';
+	}
+	else
+	{
+		el.style.display = '';
+	}
+}
+
+function $() {
+var elements = new Array();
+for (var i = 0; i < arguments.length; i++) {
+var element = arguments[i];
+if (typeof element == 'string')
+element = document.getElementById(element);
+if (arguments.length == 1)
+return element;
+elements.push(element);
+}
+return elements;
+}
+
+function collapseAll(objs) {
+var i;
+for (i=0;i<objs.length;i++ ) {
+objs[i].style.display = 'none';
+}
+}
+function pageLoad() {
+collapseAll($('login','opman', 'reference', 'currency', 'counterparty', 'entitycurrency'));
+}
+addEvent(window,'load',pageLoad);
+</script>
+</head>
+
+<body>
+
+<div id='loginh'>
+	<h1 onclick='switchMenu("login");switchMenu("loginh");'>+ Login</h1>
+</div>
+<div id='login'>
+<h1 onclick='switchMenu("login");switchMenu("loginh");'>- Login</h1>
+	<p>
+		<a href="login.xml?username=stc&password=password">Correct Login XML</a> |
+		<a href="login.xml?username=nonexistantuser&password=password">Incorrect Login XML</a>
+	</p>
+	<p>Test users:</p>
+	<ul>
+		<li>stc / password - Settlements Team Clerk</li>
+		<li>sts / password - Settlements Team Supervisor</li>
+		<li>rdc / password - Resource Data Clerk</li>
+		<li>rds / password - Resource Data Supervisor</li>
+		<li>om / password - Operations Management</li>
+		<li>it / password - IT Services</li>
+	</ul>
+	<p>
+		Returns the user&#39;s role (STC, STS, RDC, RDS, OM, IT) and name in the following format:
+	</p>
+<pre>
+&lt;login&gt;
+	  &lt;role&gt;STC&lt;/role&gt;
+	  &lt;name&gt;Chuck Norris&lt;/role&gt;
+&lt;/login&gt;
+</pre>
+	<p>If the username/password combination is incorrect, returns the following:</p>
+<pre>
+&lt;login&gt;
+	  &lt;role&gt;InvalidPassword&lt;/role&gt;
+&lt;/login&gt;
+</pre>
+</div>
+
+<hr>
+
+<div id='opmanh'>
+	<h1 onclick='switchMenu("opman");switchMenu("opmanh");'>+ Operations Management</h1>
+</div>
+<div id='opman'>
+	<h1 onclick='switchMenu("opman");switchMenu("opmanh");'>- Operations Management</h1>
+	<p>
+		<a href="getCashflowsInStages.xml">Operations Management XML</a>
+	</p>
+	<p>
+		Returns the number of cashflows in each stage of the system, in the following format:
+	</p>
+<pre>
+&lt;cashflowdata&gt;
+	  &lt;stages&gt;
+			&lt;enrichment&gt;0&lt;/enrichment&gt;
+			&lt;approval&gt;0&lt;/approval&gt;
+			&lt;dispatch&gt;0&lt;/dispatch&gt;
+	  &lt;/stages&gt;
+	  &lt;totals&gt;
+			&lt;current&gt;0&lt;/current&gt;
+			&lt;alltime&gt;0&lt;/alltime&gt;
+	  &lt;/totals&gt;
+&lt;/data&gt;
+</pre>
+</div>
+
+<hr>
+
+<div id='referenceh'>
+	<h1 onclick='switchMenu("reference");switchMenu("referenceh");'>+ Reference Data</h1>
+</div>
+<div id='reference'>
+	<h1 onclick='switchMenu("reference");switchMenu("referenceh");'>- Reference Data</h1>
+	
+	<div id='currencyh'>
+		<h2 onclick='switchMenu("currency");switchMenu("currencyh");'>+ Currency</h2>
+	</div>
+	<div id='currency'>
+		<h2 onclick='switchMenu("currency");switchMenu("currencyh");'>- Currency</h2>
+		<p>
+			<a href="getCurrency.xml?code=JPY">Currency XML</a>
+		</p>
+		<p>Returns a currency in the format:</p>
+<pre>
+&lt;currency&gt;
+	&lt;code&gt;JPY&lt;/code&gt;
+	&lt;name&gt;Japanese Yen&lt;/name&gt;
+	&lt;stp&gt;1&lt;/stp&gt;
+	&lt;foureyes&gt;&lt;/foureyes&gt;
+	&lt;sendout&gt;1&lt;/sendout&gt;
+	&lt;limit&gt;630130000&lt;/limit&gt;
+&lt;/currency&gt;
+</pre>
+		<p>If a currency does not exist with that code, it returns this:</p>
+<pre>
+&lt;currency&gt;
+	&lt;name&gt;IncorrectCode&lt;/name&gt;
+&lt;/currency&gt;
+</pre>
+	</div>
+	
+	<div id='counterpartyh'>
+		<h2 onclick='switchMenu("counterparty");switchMenu("counterpartyh");'>+ Counterparty</h2>
+	</div>
+	<div id='counterparty'>
+		<h2 onclick='switchMenu("counterparty");switchMenu("counterpartyh");'>- Counterparty</h2>
+		<p>
+			<a href="getCounterparty.xml?id=BA_AG">Counterparty XML</a>
+		</p>
+		<p>Returns a counterparty in the format:</p>
+<pre>
+&lt;counterparty&gt;
+	&lt;counterpartyID&gt;BA_AG&lt;/counterpartyID&gt;
+	&lt;shortname&gt;&lt;/shortname&gt;
+	&lt;longname&gt;Bank of Andre Vienna&lt;/longname&gt;
+	&lt;nett&gt;1&lt;/nett&gt;
+	&lt;stp&gt;1&lt;/stp&gt;
+	&lt;bic&gt;BAAUATVI&lt;/bic&gt;
+	&lt;foureyes&gt;0&lt;/foureyes&gt;
+	&lt;local&gt;1&lt;/local&gt;
+	&lt;address&gt;BANK OF ANDRE
+	23 SEILERGASSE
+	WEIN
+	AUSTRIA&lt;/address&gt;
+&lt;/counterparty&gt;
+</pre>
+		<p>If a counterparty does not exist with that ID, it returns this:</p>
+<pre>
+&lt;counterparty&gt;
+	&lt;name&gt;IncorrectID&lt;/name&gt;
+&lt;/counterparty&gt;
+</pre>
+	<p>If <code>local</code> is true (i.e. local == 1), this is a DB entity, otherwise it is an exernal entity. DB entities do not have a <code>shortname</code>.</p>
+	</div>
+	
+	<div id='entitycurrencyh'>
+		<h2 onclick='switchMenu("entitycurrency");switchMenu("entitycurrencyh");'>+ Entity/Currency</h2>
+	</div>
+	<div id='entitycurrency'>
+		<h2 onclick='switchMenu("entitycurrency");switchMenu("entitycurrencyh");'>- Entity/Currency</h2>
+		<p>
+			<a href="getEntityCurrency.xml">Entire Entity/Currency List XML</a> |
+			<a href="getEntityCurrency.xml?entity=BA_AG">Single Entity</a> |
+			<a href="getEntityCurrency.xml?currency=ARS">Single Currency</a> |
+			<a href="getEntityCurrency.xml?entity=BA_AG&currency=ARS">Single Entity/Currency Combination</a>
+		</p>
+		<p>Returns an Entity/Currency list in the format:</p>
+<pre>
+&lt;entitycurrencylist&gt;
+	&lt;unknownNode&gt;
+		&lt;entity&gt;BA_AG&lt;/entity&gt;
+		&lt;currency&gt;ARS&lt;/currency&gt;
+		&lt;effectiveDate&gt;2007-10-12&lt;/effectiveDate&gt;
+		&lt;agent&gt;BKNAPC23&lt;/agent&gt;
+		&lt;account&gt;7428 892323&lt;/account&gt;
+		&lt;nett&gt;1&lt;/nett&gt;
+		&lt;stp&gt;0&lt;/stp&gt;
+		&lt;foureyes&gt;1&lt;/foureyes&gt;
+	&lt;/unknownNode&gt;
+	&lt;unknownNode&gt;
+		&lt;entity&gt;BA_LD&lt;/entity&gt;
+		&lt;currency&gt;ARS&lt;/currency&gt;
+		&lt;effectiveDate&gt;2007-10-12&lt;/effectiveDate&gt;
+		&lt;agent&gt;ISRE12313&lt;/agent&gt;
+		&lt;account&gt;11741 123145&lt;/account&gt;
+		&lt;nett&gt;1&lt;/nett&gt;
+		&lt;stp&gt;0&lt;/stp&gt;
+		&lt;foureyes&gt;1&lt;/foureyes&gt;
+	&lt;/unknownNode&gt;
+	&lt;unknownNode&gt;
+		&lt;entity&gt;BLUESECURLDN&lt;/entity&gt;
+		&lt;currency&gt;ARS&lt;/currency&gt;
+		&lt;effectiveDate&gt;2006-03-02&lt;/effectiveDate&gt;
+		&lt;agent&gt;ARS12311&lt;/agent&gt;
+		&lt;account&gt;31249988&lt;/account&gt;
+		&lt;nett&gt;1&lt;/nett&gt;
+		&lt;stp&gt;1&lt;/stp&gt;
+		&lt;foureyes/&gt;
+	&lt;/unknownNode&gt;
+&lt;/entitycurrencylist&gt;
+</pre>
+		<p>
+			In most cases (i.e. entity and currency specified), this list will be of length 1 (or 0). The <code>unknownNode</code> is an unavoidable consequency of the PHP array to XML code I am using for this.
+		</p>
+	
+	</div>
+	
+	
+
+
+
+	
+</div>
+<hr/>
+
+<h1>Code Used</h1>
+<p>Php Array --> XML code from here:<br/>
+	<a href="http://snipplr.com/view/3491/convert-php-array-to-xml-or-simple-xml-object-if-you-wish/">Convert PHP Array to XML or Simple XML Object if you wish</a>
+</p>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+<?php
+
+require_once( "class.arrayToXML.php" );
+require_once( "db.php" );
+
+?>
